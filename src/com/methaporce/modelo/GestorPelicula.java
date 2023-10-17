@@ -1,49 +1,48 @@
 package com.methaporce.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class GestorPelicula {
-
     private List<Pelicula> peliculas;
 
-    public static Pelicula agregarPelicula() {
-        Pelicula peli = new Pelicula();
-        peli.setId(Integer.parseInt(JOptionPane.showInputDialog("Id de peli:")));
-        peli.setNombre(JOptionPane.showInputDialog("Nombre de pelicula"));
-       
-        return peli;
+    public GestorPelicula() {
+        peliculas = new ArrayList<>();
     }
 
-    public static void impAlm(List<Pelicula> peli) {
-        for (Pelicula a : peli) {
-            JOptionPane.showMessageDialog(null, a);
+    public void agregarPelicula(Pelicula pelicula) {
+        peliculas.add(pelicula);
+    }
+
+    public void eliminarPelicula(int id) {
+        peliculas.removeIf(p -> p.getId() == id);
+    }
+
+    public List<Pelicula> obtenerPeliculas() {
+        return peliculas;
+    }
+
+    public List<Pelicula> obtenerPeliculasDisponibles() {
+        List<Pelicula> disponibles = new ArrayList<>();
+        for (Pelicula pelicula : peliculas) {
+            if (pelicula.isDisponible()) {
+                disponibles.add(pelicula);
+            }
         }
+        return disponibles;
+    }
+
+    public List<Pelicula> obtenerPeliculasNoDisponibles() {
+        List<Pelicula> noDisponibles = new ArrayList<>();
+        for (Pelicula pelicula : peliculas) {
+            if (!pelicula.isDisponible()) {
+                noDisponibles.add(pelicula);
+            }
+        }
+        return noDisponibles;
     }
     
-    
-    public static Pelicula eliminarPeli(){
-        
-        
-        return null;
-    }
-    
-    public static Pelicula obtenerPelis(){
-    return null;
-    }
-    
-    public static Pelicula pelisDisponibles(){
-    return null;
-    }
-    public static Pelicula pelisNoDisponibles(){
-    return null;
-    }
-    
-    
-    public static Pelicula MarcarPeliculaComoDisponible(int id){
-        
-        
-    return null;
-    }
-    
+
+
 }
+
